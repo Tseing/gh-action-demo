@@ -1,5 +1,5 @@
 [project]
-name = "gh-action-demo"
+name = "leo-gh-action-demo"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
