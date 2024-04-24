@@ -1,0 +1,48 @@
+name: Build Python distributions
+
+# 由 pull request 和 push 触发，排除带有版本 tag 的 push
+on:
+  pull_request:
+  push:
+    tags-ignore:
+      - "v*"
+
+jobs:
+  # 分别在不同平台构建 .whl 安装包
+  build_whl:
+    strategy:
+      # 使用 matrix 组合在多种 OS 平台上完成 wheel 的构建
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        # 给对应的 OS 添加一个新变量 plat_name
+        include:
+          - os: ubuntu-latest
+            plat_name: linux_x86_64
+          - os: windows-latest
+            plat_name: win_amd64
+
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pdm-project/setup-pdm@v3
+        with:
+          architecture: x64
+
+      # 通过 PDM 构建 wheel
+      - name: PDM build wheels
+        run: pdm build --no-sdist --config-setting="--plat-name=${{ matrix.plat_name }}"
+
+  # 将源码打包为 tar.gz
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pdm-project/setup-pdm@v3
+
+      # 通过 PDM 打包源码
+      - name: PDM build source dist
+        run: pdm build --no-wheel
