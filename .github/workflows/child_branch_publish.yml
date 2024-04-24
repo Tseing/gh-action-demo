@@ -65,7 +65,7 @@ jobs:
   publish_pkg:
     name: Publish package to TestPyPI
     # 执行条件为 tag 以 "v" 开头
-    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    if: startsWith(github.event.ref, 'refs/tags/v')
     # 且在 build_whl 和 build_sdist 两个 job 完成的情况下执行
     needs: [build_whl, build_sdist]
     runs-on: ubuntu-latest
