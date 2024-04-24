@@ -22,8 +22,6 @@ jobs:
     # 每个 job 由若干 step 组成
     steps:
       # PDM 所需的环境配置
-      - uses: actions/checkout@v3
-
       - uses: pdm-project/setup-pdm@v3
 
       # 运行命令行程序，通过 PDM 发布到 TestPyPI
