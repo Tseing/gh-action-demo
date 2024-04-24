@@ -1,8 +1,7 @@
 name: Build Python distributions
 
-# 由 pull request 和 push 触发，排除带有版本 tag 的 push
+# 由 push 触发，带有版本 tag 的 push 不运行此 workflow
 on:
-  pull_request:
   push:
     tags-ignore:
       - "v*"
