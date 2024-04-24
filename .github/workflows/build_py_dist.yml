@@ -14,7 +14,7 @@ jobs:
         # 给对应的 OS 添加一个新变量 plat_name
         include:
           - os: ubuntu-latest
-            plat_name: linux_x86_64
+            plat_name: manylinux_x86_64
           - os: windows-latest
             plat_name: win_amd64
 
@@ -27,6 +27,8 @@ jobs:
         with:
           architecture: x64
 
+      # 查看 GNU libc 版本
+      - run: ldd --version
       # 通过 PDM 构建 wheel
       - name: PDM build wheels
         run: pdm build --no-sdist --config-setting="--plat-name=${{ matrix.plat_name }}"
