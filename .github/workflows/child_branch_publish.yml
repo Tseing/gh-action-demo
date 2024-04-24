@@ -39,7 +39,7 @@ jobs:
       # 将 dist/ 目录中的所有 .whl 文件上传暂存
       - uses: actions/upload-artifact@v4
         with:
-          name: pdm-build-wheels
+          name: pdm-build-wheel-${{ matrix.plat_name }}
           path: dist/*.whl
 
   # 将源码打包为 tar.gz
