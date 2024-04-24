@@ -53,7 +53,7 @@ jobs:
 
       # 通过 PDM 打包源码
       - name: PDM build source dist
-        run: pdm build --no-wheel"
+        run: pdm build --no-wheel
 
       # 将 dist/ 目录中的打包的源码上传暂存
       - uses: actions/upload-artifact@v4
