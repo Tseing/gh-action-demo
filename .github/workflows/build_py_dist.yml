@@ -93,14 +93,14 @@ jobs:
       id-token: write
 
     steps:
+    # 使用 PDM 发布已构建的文件
+    - uses: actions/checkout@v3
+    - uses: pdm-project/setup-pdm@v3
     - uses: actions/download-artifact@v4
       with:
         pattern: pdm-build-*
         path: dist
         merge-multiple: true
-    # 使用 PDM 发布已构建的文件
-    - uses: actions/checkout@v3
-    - uses: pdm-project/setup-pdm@v3
     # `pdm publish --no-build` 会自动发布 `dist` 中预先构建好的文件
     - name: Publish package distributions to TestPyPI
       run: pdm publish --no-build --repository testpypi
