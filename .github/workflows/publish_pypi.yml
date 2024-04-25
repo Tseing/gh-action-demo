@@ -1,0 +1,27 @@
+name: Publish distributions to PyPI
+
+# 由正式 release 触发
+on:
+  release:
+    types: [released]
+jobs:
+  # 将构建文件发布到 PyPI
+  publish_pkg:
+    name: Publish package to PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: pdm-project/setup-pdm@v3
+    # 从 release 中下载所有文件
+    - uses: robinraju/release-downloader@v1.10
+      with:
+        latest: true
+        fileName: "*"
+        out-file-path: "dist"
+    # 使用 PDM 将下载的文件发布到 PyPI
+    - name: Publish package distributions to PyPI
+      run: pdm publish --no-build --repository testpypi
