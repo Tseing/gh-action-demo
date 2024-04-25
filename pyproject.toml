@@ -1,6 +1,6 @@
 [project]
 name = "leo-gh-action-demo"
-version = "0.1.1a4"
+version = "0.1.1b1"
 description = "Default template for PDM package"
 authors = [
     {name = "Leo", email = "im.yczeng@foxmail.com"},

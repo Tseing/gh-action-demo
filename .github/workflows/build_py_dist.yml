@@ -10,12 +10,12 @@ jobs:
     strategy:
       # 使用 matrix 组合在多种 OS 平台上完成 wheel 的构建
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-22.04, windows-2022]
         # 给对应的 OS 添加一个新变量 plat_name
         include:
-          - os: ubuntu-latest
-            plat_name: manylinux_x86_64
-          - os: windows-latest
+          - os: ubuntu-22.04
+            plat_name: manylinux_2_35_x86_64
+          - os: windows-2022
             plat_name: win_amd64
 
     name: Build wheels on ${{ matrix.os }}
